@@ -1,0 +1,948 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="description"
+            content="Documentation for the GoTable API"
+        >
+    <title>GoTable API Reference</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-fdff6a80.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-024da600.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-d77cb67b.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#restaurants" class="toc-h1 toc-link" data-title="Restaurants">Restaurants</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-registered-restaurants" class="toc-h2 toc-link" data-title="Get Registered Restaurants">Get Registered Restaurants</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-restaurant" class="toc-h2 toc-link" data-title="Get a Specific Restaurant">Get a Specific Restaurant</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-new-restaurant" class="toc-h2 toc-link" data-title="Create a New Restaurant">Create a New Restaurant</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#availability" class="toc-h1 toc-link" data-title="Availability">Availability</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-restaurant-availability" class="toc-h2 toc-link" data-title="Get Restaurant Availability">Get Restaurant Availability</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#bookings" class="toc-h1 toc-link" data-title="Bookings">Bookings</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-booking" class="toc-h2 toc-link" data-title="Get Booking">Get Booking</a>
+                  </li>
+                  <li>
+                    <a href="#create-booking" class="toc-h2 toc-link" data-title="Create Booking">Create Booking</a>
+                  </li>
+                  <li>
+                    <a href="#update-booking" class="toc-h2 toc-link" data-title="Update Booking">Update Booking</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-reservation" class="toc-h2 toc-link" data-title="Cancel Reservation">Cancel Reservation</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#areas" class="toc-h1 toc-link" data-title="Areas">Areas</a>
+          </li>
+          <li>
+            <a href="#tables" class="toc-h1 toc-link" data-title="Tables">Tables</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-available-restaurant-tables" class="toc-h2 toc-link" data-title="Get Available Restaurant Tables">Get Available Restaurant Tables</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://gotable.app/api-signup'>Sign Up for a Developer Key</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the GoTable API! You can use our API to access GoTable API endpoints, which can get information on restaurants, reservations, and availability in our database.</p>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you have to pass the correct header with each request</span>
+curl <span class="s2">"https://gotable.app/api/v1/restaurants"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'gotable'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">GoTable</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'YOUR_API_KEY_HERE'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">restaurants</span><span class="p">.</span><span class="nf">get</span>
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>YOUR_API_KEY_HERE</code> with your API key.</p>
+</blockquote>
+
+<p>GoTable uses API keys to allow access to the API. You can register a new GoTable API key by contacting our support team.</p>
+
+<aside class="notice">GoTable expects the API key to be included in all API requests to the server in a header that looks like the following:
+
+`Authorization: Bearer YOUR_API_KEY_HERE`</aside>
+<h1 id='restaurants'>Restaurants</h1><h2 id='get-registered-restaurants'>Get Registered Restaurants</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gotable.app/api/v1/restaurants"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"restaurants"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">129946</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Restaurant name"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+31 6 23 45 67 89"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info@gotable.nl"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brugstraat"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6136 AC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"street_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geleen"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Netherlands"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">129947</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another Restaurant"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+31 6 12 34 56 78"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info@anotherrestaurant.nl"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Street"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234 AB"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amsterdam"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Netherlands"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves all restaurants registered to your API Key.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://gotable.app/api/v1/restaurants</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>The page number for pagination</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>20</td>
+<td>Number of restaurants per page</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-restaurant'>Get a Specific Restaurant</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gotable.app/api/v1/restaurants/129946"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">129946</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Restaurant name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+31 6 23 45 67 89"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info@gotable.nl"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brugstraat"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6136 AC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geleen"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Netherlands"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.9887764</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.8487702</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a specific restaurant.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://gotable.app/api/v1/restaurants/&lt;restaurantUid&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>restaurantUid*</td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-new-restaurant'>Create a New Restaurant</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://gotable.app/api/v1/restaurants"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "restaurant": {
+      "name": "New Restaurant",
+      "email": "info@newrestaurant.com",
+      "telephone": "+31 6 12 34 56 78",
+      "private_feedback_url": "https://feedback.newrestaurant.com",
+      "reservation_follow_up_setting": "always",
+      "minimum_guests": 1,
+      "maximum_guests": 10,
+      "realtime_setting": "availability",
+      "realtime_reject_setting": "accept",
+      "country_code": "NL"
+    }
+  }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">129948</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Restaurant"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+31 6 12 34 56 78"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info@newrestaurant.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"private_feedback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://feedback.newrestaurant.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reservation_follow_up_setting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"always"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"minimum_guests"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"maximum_guests"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"realtime_setting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"availability"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"realtime_reject_setting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accept"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NL"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a new restaurant.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://gotable.app/api/v1/restaurants</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name*</td>
+<td>string</td>
+<td></td>
+<td>The name of the restaurant</td>
+</tr>
+<tr>
+<td>email*</td>
+<td>string</td>
+<td></td>
+<td>The email address of the restaurant</td>
+</tr>
+<tr>
+<td>telephone</td>
+<td>string</td>
+<td></td>
+<td>The telephone number of the restaurant</td>
+</tr>
+<tr>
+<td>private_feedback_url</td>
+<td>string</td>
+<td></td>
+<td>URL for private feedback (must start with http:// or https://)</td>
+</tr>
+<tr>
+<td>reservation_follow_up_setting*</td>
+<td>string</td>
+<td></td>
+<td>Must be one of: &#39;always&#39;, &#39;local&#39;, &#39;self&#39;, or &#39;never&#39;</td>
+</tr>
+<tr>
+<td>minimum_guests</td>
+<td>integer</td>
+<td></td>
+<td>Minimum number of guests allowed (must be less than or equal to maximum_guests)</td>
+</tr>
+<tr>
+<td>maximum_guests</td>
+<td>integer</td>
+<td></td>
+<td>Maximum number of guests allowed</td>
+</tr>
+<tr>
+<td>realtime_setting*</td>
+<td>string</td>
+<td>&#39;off&#39;</td>
+<td>Must be one of: &#39;off&#39;, &#39;availability&#39;, or &#39;capacity&#39;</td>
+</tr>
+<tr>
+<td>realtime_reject_setting*</td>
+<td>string</td>
+<td>&#39;accept&#39;</td>
+<td>Must be one of: &#39;accept&#39; or &#39;reject&#39;</td>
+</tr>
+<tr>
+<td>country_code*</td>
+<td>string</td>
+<td>&#39;NL&#39;</td>
+<td>Two-letter country code</td>
+</tr>
+<tr>
+<td>maintainer_ids</td>
+<td>array</td>
+<td></td>
+<td>Array of maintainer IDs</td>
+</tr>
+</tbody></table>
+<h1 id='availability'>Availability</h1><h2 id='get-restaurant-availability'>Get Restaurant Availability</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gotable.app/api/v1/restaurants/129946/availability?from=2024-10-29&amp;till=2024-11-01"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-29"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"till"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-11-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"availabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-29"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeslots"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"10:00"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"10:30"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"11:00"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"11:30"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-30"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeslots"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"10:00"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"10:30"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"11:00"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"11:30"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<p>This endpoint retrieves the availability for a specific restaurant over a given date range.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://gotable.app/api/v1/restaurants/&lt;restaurantUid&gt;/availability</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID*</td>
+<td>The ID of the restaurant to retrieve availability for</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>from</td>
+<td>today</td>
+<td>Start date for availability (format: YYYY-MM-DD)</td>
+</tr>
+<tr>
+<td>till</td>
+<td>tomorrow</td>
+<td>End date for availability (format: YYYY-MM-DD)</td>
+</tr>
+<tr>
+<td>restaurantUid*</td>
+<td></td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+</tbody></table>
+<h3 id='response-structure'>Response Structure</h3>
+<p>The response includes the following main elements:</p>
+
+<ul>
+<li>  <code>from</code>: The start date of the requested availability range</li>
+<li>  <code>till</code>: The end date of the requested availability range</li>
+<li>  <code>availabilities</code>: An array of availability objects, one for each date in the range</li>
+</ul>
+
+<p>Each availability object contains:</p>
+
+<ul>
+<li>  <code>date</code>: The date for this availability entry</li>
+<li>  <code>timeslots</code>: An object where each key is a time slot (in &quot;HH:MM&quot; format) and each value is an array with two elements:
+
+<ul>
+<li>  The first element is the minimum number of seats available</li>
+<li>  The second element is the maximum number of seats available</li>
+</ul></li>
+</ul>
+<h1 id='bookings'>Bookings</h1><h2 id='get-booking'>Get Booking</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gotable.app/api/v1/restaurants/129946/booking/12345"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div>
+<p>This endpoint retrieves information about a specific booking.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://gotable.app/api/v1/&lt;restaurantUid&gt;/booking/&lt;uid&gt;</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>restaurantUid*</td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+<tr>
+<td>uid*</td>
+<td>The unique identifier of the booking</td>
+</tr>
+</tbody></table>
+<h2 id='create-booking'>Create Booking</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://gotable.app/api/v1/restaurants/129946/booking"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "booking": {
+      "date": "2024-11-01",
+      "time": "19:00",
+      "party_size": 4,
+      "customer_name": "John Doe",
+      "customer_email": "john@example.com",
+      "customer_phone": "+31612345678"
+    }
+  }'</span>
+</code></pre></div>
+<p>This endpoint creates a new booking for the restaurant.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://gotable.app/api/v1/&lt;restaurantUid&gt;/booking</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>restaurantUid*</td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+</tbody></table>
+<h2 id='update-booking'>Update Booking</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> PUT <span class="s2">"https://gotable.app/api/v1/restaurants/129946/booking/12345"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "booking": {
+      "party_size": 5
+    }
+  }'</span>
+</code></pre></div>
+<p>This endpoint updates the details of a reservation.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>PUT https://gotable.app/api/v1/&lt;restaurantUid&gt;/booking/&lt;uid&gt;</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>restaurantUid*</td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+<tr>
+<td>uid*</td>
+<td>The unique identifier of the booking</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-reservation'>Cancel Reservation</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> DELETE <span class="s2">"https://gotable.app/api/v1/restaurants/&lt;restaurantUid&gt;/reservation/&lt;reservationUid&gt;"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div>
+<p>This endpoint cancels a reservation.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>DELETE https://gotable.app/api/v1/&lt;restaurantUid&gt;/booking/&lt;uid&gt;</code></p>
+<h3 id='url-parameters-6'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>restaurantUid*</td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+<tr>
+<td>uid*</td>
+<td>The unique identifier of the booking</td>
+</tr>
+</tbody></table>
+<h1 id='areas'>Areas</h1><h1 id='tables'>Tables</h1><h2 id='get-available-restaurant-tables'>Get Available Restaurant Tables</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://gotable.app/api/v1/restaurants/129946/tables"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_API_KEY_HERE"</span>
+</code></pre></div>
+<p>This endpoint retrieves the list of tables for a restaurant.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET https://gotable.app/api/v1/&lt;restaurantUid&gt;/tables</code></p>
+<h3 id='url-parameters-7'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>restaurantUid*</td>
+<td>The unique identifier of the restaurant</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<p>The GoTable API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The requested resource is not accessible to you.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified resource could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a resource with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The resource requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many resources! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
