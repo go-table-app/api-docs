@@ -155,7 +155,7 @@ curl -X POST "https://gotable.app/api/v1/restaurants/<restaurant_id>/reservation
       "guests": 4,
       "guest_name": "John Doe",
       "guest_email": "john@example.com",
-      "guest_phone": "+31612345678",
+      "guest_telephone": "+31612345678",
       "type": "WalkIn"
     }
   }'
