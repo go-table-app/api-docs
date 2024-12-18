@@ -6,16 +6,17 @@ Returns a paginated list of reservations for your restaurant.
 
 ### Response Format
 
-| Field         | Type    | Description                                                                       |
-| ------------- | ------- | --------------------------------------------------------------------------------- |
-| id            | integer | Unique reservation identifier                                                     |
-| guest_name    | string  | Customer's name                                                                   |
-| guest_email   | string  | Customer's email                                                                  |
-| date          | string  | Reservation date (YYYY-MM-DD)                                                     |
-| time          | string  | Reservation time (HH:MM)                                                          |
-| guests        | integer | Number of guests                                                                  |
-| state         | string  | Reservation status: "pending", "confirmed", "checked_in", "rejected", "cancelled" |
-| restaurant_id | integer | Restaurant identifier                                                             |
+| Field           | Type    | Description                                                                       |
+| --------------- | ------- | --------------------------------------------------------------------------------- |
+| id              | integer | Unique reservation identifier                                                     |
+| guest_name      | string  | Primary guest's name                                                              |
+| guest_email     | string  | Primary guest's email                                                             |
+| guest_telephone | string  | Primary guest's telephone                                                         |
+| date            | string  | Reservation date (YYYY-MM-DD)                                                     |
+| time            | string  | Reservation time (HH:MM)                                                          |
+| guests          | integer | Number of guests                                                                  |
+| state           | string  | Reservation status: "pending", "confirmed", "checked_in", "rejected", "cancelled" |
+| restaurant_id   | integer | Restaurant identifier                                                             |
 
 ### Pagination
 
@@ -37,9 +38,29 @@ curl -X GET \
   -H "Content-Type: application/json"
 ```
 
+```javascript
+const restaurant_id = 123456
+const token = 'YOUR_API_KEY_HERE'
+
+fetch(`https://gotable.app/api/v1/restaurants/${restaurant_id}/reservations`, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+}).then(
+  (response) => response.json()
+).then((json) => {
+  console.log('reservations', json.reservations)
+})
+```
+
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-reservation = api.reservations(restaurantUid).list
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant = api.restaurants.find(restaurant_id)
+reservations = restaurant.reservations
 ```
 
 > The above command returns JSON structured like this:
@@ -68,7 +89,7 @@ reservation = api.reservations(restaurantUid).list
          "restaurant_id":130170
       },
       // ... more reservations
-      ],
+    ],
    "meta":{
       "current_page":1,
       "per_page":20,
@@ -81,13 +102,16 @@ reservation = api.reservations(restaurantUid).list
 ## Get Reservation
 
 ```shell
-curl "https://gotable.app/api/v1/restaurants/<restaurantUid>/reservations/<reservationUid>" \
+curl "https://gotable.app/api/v1/restaurants/<restaurant_id>/reservations/<reservation_id>" \
   -H "Authorization: Bearer YOUR_API_KEY_HERE"
 ```
 
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-reservation = api.reservations(restaurantUid).get(reservationUid)
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant  = api.restaurants.find(restaurant_id)
+reservation = restaurant.reservations.find(reservation_id)
 ```
 
 > The above command returns JSON structured like this:
@@ -109,19 +133,19 @@ This endpoint retrieves information about a specific reservation. Linked to a re
 
 ### HTTP Request
 
-`GET https://gotable.app/api/v1/<restaurantUid>/reservation/<reservationUid>`
+`GET https://gotable.app/api/v1/<restaurant_id>/reservation/<reservation_id>`
 
 ### URL Parameters
 
 | Parameter        | Description                      |
 | ---------------- | -------------------------------- |
-| restaurantUid\*  | The unique id of the restaurant  |
-| reservationUid\* | The unique id of the reservation |
+| restaurant_id\*  | The unique id of the restaurant  |
+| reservation_id\* | The unique id of the reservation |
 
 ## Create Reservation
 
 ```shell
-curl -X POST "https://gotable.app/api/v1/restaurants/<restaurantUid>/reservations" \
+curl -X POST "https://gotable.app/api/v1/restaurants/<restaurant_id>/reservations" \
   -H "Authorization: Bearer YOUR_API_KEY_HERE" \
   -H "Content-Type: application/json" \
   -d '{
@@ -138,13 +162,17 @@ curl -X POST "https://gotable.app/api/v1/restaurants/<restaurantUid>/reservation
 ```
 
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-reservation = api.reservations(restaurantUid).create(
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant = api.restaurants.find(restaurant_id)
+reservation = restaurant.reservations.create(
   date: '2024-12-01',
   time: '19:00',
   guests: 4,
   guest_name: 'John Doe',
-  guest_email: 'john@example.com'
+  guest_email: 'john@example.com',
+  guest_telephone: '0612345678'
 )
 ```
 
@@ -169,9 +197,9 @@ Creates a new reservation for your restaurant. Your API key must be registered t
 
 | Parameter           | Type    | Description                      |
 | ------------------- | ------- | -------------------------------- |
-| guest_name          | string  | Customer's name                  |
-| guest_mobile        | string  | Customer's phone number          |
-| guest_email         | string  | Customer's email address         |
+| guest_name          | string  | Primary guest's name             |
+| guest_telephone     | string  | Primary guest's phone number     |
+| guest_email         | string  | Primary guest's email address    |
 | guests              | integer | Number of guests                 |
 | duration_in_minutes | integer | Length of reservation in minutes |
 
@@ -185,13 +213,13 @@ Creates a new reservation for your restaurant. Your API key must be registered t
 
 ### HTTP Request
 
-`POST https://gotable.app/api/v1/<restaurantUid>/reservations`
+`POST https://gotable.app/api/v1/<restaurant_id>/reservations`
 
 ### URL Parameters
 
 | Parameter       | Description                     |
 | --------------- | ------------------------------- |
-| restaurantUid\* | The unique id of the restaurant |
+| restaurant_id\* | The unique id of the restaurant |
 
 ## Update Reservation
 
@@ -207,8 +235,12 @@ curl -X PUT "https://gotable.app/api/v1/restaurants/129946/reservations/12345" \
 ```
 
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-api.reservations(restaurantUid).update(reservationUid, { guests: 5 })
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant = api.restaurants.find(restaurant_id)
+reservation = restaurant.reservations.find(reservation_id)
+reservation.update(guests: 5)
 ```
 
 > The above command returns JSON structured like this:
@@ -230,25 +262,29 @@ This endpoint updates the details of a reservation.
 
 ### HTTP Request
 
-`PUT https://gotable.app/api/v1/<restaurantUid>/reservation/<uid>`
+`PUT https://gotable.app/api/v1/<restaurant_id>/reservation/<reservation_id>`
 
 ### URL Parameters
 
-| Parameter       | Description           |
-| --------------- | --------------------- |
-| restaurantUid\* | id of the restaurant  |
-| uid\*           | id of the reservation |
+| Parameter        | Description           |
+| ---------------- | --------------------- |
+| restaurant_id\*  | id of the restaurant  |
+| reservation_id\* | id of the reservation |
 
 ## Cancel Reservation
 
 ```shell
-curl -X PUT "https://gotable.app/api/v1/restaurants/<restaurantUid>/reservations/<reservationUid>" \
+curl -X PUT "https://gotable.app/api/v1/restaurants/<restaurant_id>/reservations/<reservation_id>" \
   -H "Authorization: Bearer YOUR_API_KEY_HERE"
 ```
 
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-api.reservations(restaurantUid).cancel(reservationUid)
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant = api.restaurants.find(restaurant_id)
+reservation = restaurant.reservations.find(reservation_id)
+reservation.cancel
 ```
 
 > The above command returns JSON structured like this:
@@ -270,11 +306,11 @@ This endpoint cancels a specific reservation.
 
 ### HTTP Request
 
-`PUT https://gotable.app/api/v1/<restaurantUid>/reservation/<uid>`
+`PUT https://gotable.app/api/v1/<restaurant_id>/reservation/<uid>`
 
 ### URL Parameters
 
 | Parameter       | Description                      |
 | --------------- | -------------------------------- |
-| restaurantUid\* | The unique id of the restaurant  |
+| restaurant_id\* | The unique id of the restaurant  |
 | uid\*           | The unique id of the reservation |

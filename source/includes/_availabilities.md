@@ -3,13 +3,16 @@
 ## Get Restaurant Availability
 
 ```shell
-curl "https://gotable.app/api/v1/restaurants/<restaurantUid>/availability?from=2024-10-29&till=2024-11-01" \
+curl "https://gotable.app/api/v1/restaurants/<restaurant_id>/availability?from=2024-10-29&till=2024-11-01" \
   -H "Authorization: Bearer YOUR_API_KEY_HERE"
 ```
 
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-availability = api.restaurants(restaurantUid).availability(from: '2024-10-29', till: '2024-11-01')
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant = api.restaurants.find(restaurant_id)
+availabilities = restaurant.availability.from('2024-10-29').till('2024-11-01')
 ```
 
 > The above command returns JSON structured like this:
@@ -21,41 +24,43 @@ availability = api.restaurants(restaurantUid).availability(from: '2024-10-29', t
   "availabilities": [
     {
       "date": "2024-09-18",
+      "closed": false,
       "timeslots": [
         {
           "timeslot": "11:00",
-          "min": 0,
-          "max": 20
+          "minimum": 0,
+          "maximum": 20
         },
         {
           "timeslot": "11:30",
-          "min": 0,
-          "max": 20
+          "minimum": 0,
+          "maximum": 20
         },
         {
           "timeslot": "12:00",
-          "min": 0,
-          "max": 20
+          "minimum": 0,
+          "maximum": 20
         }
       ]
     },
     {
       "date": "2024-09-18",
+      "closed": false,
       "timeslots": [
         {
           "timeslot": "11:00",
-          "min": 0,
-          "max": 20
+          "minimum": 0,
+          "maximum": 20
         },
         {
           "timeslot": "11:30",
-          "min": 0,
-          "max": 20
+          "minimum": 0,
+          "maximum": 20
         },
         {
           "timeslot": "12:00",
-          "min": 0,
-          "max": 20
+          "minimum": 0,
+          "maximum": 20
         }
       ]
     }
@@ -67,13 +72,13 @@ This endpoint retrieves the availability for a specific restaurant over a given 
 
 ### HTTP Request
 
-`GET https://gotable.app/api/v1/restaurants/<restaurantUid>/availability`
+`GET https://gotable.app/api/v1/restaurants/<restaurant_id>/availability`
 
 ### URL Parameters
 
-| Parameter | Description                                           |
-| --------- | ----------------------------------------------------- |
-| ID\*      | The ID of the restaurant to retrieve availability for |
+| Parameter       | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| restaurant_id\* | The ID of the restaurant to retrieve availability for |
 
 ### Query Parameters
 
@@ -81,7 +86,6 @@ This endpoint retrieves the availability for a specific restaurant over a given 
 | --------------- | -------- | ------------------------------------------------ |
 | from            | today    | Start date for availability (format: YYYY-MM-DD) |
 | till            | tomorrow | End date for availability (format: YYYY-MM-DD)   |
-| restaurantUid\* |          | The unique id of the restaurant                  |
 
 ### Response Structure
 
@@ -94,7 +98,8 @@ The response includes the following main elements:
 Each availability object contains:
 
 - `date`: The date for this availability entry
+- `closed`: A boolean that returns wether or not the restaurant is closed on this date.
 - `timeslots`: An array of time slot objects, where each object contains:
-- `timeslot`: The time in "HH:MM" format
-- `min`: The minimum number of seats available at this time
-- `max`: The maximum number of seats available at this time
+  - `timeslot`: The time in "HH:MM" format
+  - `minimum`: The minimum number of seats available at this time
+  - `maximum`: The maximum number of seats available at this time

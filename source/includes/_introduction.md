@@ -9,16 +9,30 @@ Welcome to the GoTable API! You can use our API to access GoTable API endpoints,
 ```shell
 # With shell, you have to pass the correct header with each request:
 curl "https://gotable.app/api/v1/restaurants" \
-  -H "Authorization: Bearer YOUR_API_KEY_HERE"
+-H "Authorization: Bearer YOUR_API_KEY_HERE"
+```
+
+```javascript
+const token = 'YOUR_API_KEY_HERE'
+
+fetch('https://gotable.app/api/v1/restaurants', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+}).then(
+  (response) => response.json()
+).then((json) => {
+  console.log('accessible restaurants', json.restaurants)
+})
 ```
 
 ```ruby
-require 'gotable_api'
+require 'go_table'
 
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-
-restaurants = api.restaurants.list
-puts restaurants
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+api.restaurants
 ```
 
 > Make sure to replace `YOUR_API_KEY_HERE` with your API key.

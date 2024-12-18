@@ -8,8 +8,10 @@ curl "https://gotable.app/api/v1/restaurants" \
 ```
 
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-restaurants = api.restaurants.list
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurants = api.restaurants
 ```
 
 > The above command returns JSON structured like this:
@@ -53,13 +55,32 @@ This endpoint retrieves all restaurants registered to your API Key.
 ## Get a Specific Restaurant
 
 ```shell
-curl "https://gotable.app/api/v1/restaurants/<restaurantUid>" \
+curl "https://gotable.app/api/v1/restaurants/<restaurant_id>" \
   -H "Authorization: Bearer YOUR_API_KEY_HERE"
 ```
 
+```javascript
+const restaurant_id = 123456
+const token = 'YOUR_API_KEY_HERE'
+
+fetch(`https://gotable.app/api/v1/restaurants/${restaurant_id}`, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+}).then(
+  (response) => response.json()
+).then((json) => {
+  console.log('restaurant data', json)
+})
+```
+
 ```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-restaurant = api.restaurants.get(restaurantUid)
+require 'go_table'
+
+api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
+restaurant = api.restaurants.find(restaurant_id)
 ```
 
 > The above command returns JSON structured like this:
@@ -81,80 +102,17 @@ This endpoint retrieves a specific restaurant.
 
 ### HTTP Request
 
-`GET https://gotable.app/api/v1/restaurants/<restaurantUid>`
+`GET https://gotable.app/api/v1/restaurants/<restaurant_id>`
 
 ### URL Parameters
 
 | Parameter       | Description                     |
 | --------------- | ------------------------------- |
-| restaurantUid\* | The unique id of the restaurant |
+| restaurant_id\* | The unique id of the restaurant |
 
-## Create a New Restaurant
+### Response attributes
 
-```shell
-curl -X POST "https://gotable.app/api/v1/restaurants" \
-  -H "Authorization: Bearer YOUR_API_KEY_HERE" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "restaurant": {
-      "name": "New Restaurant",
-      "email": "info@newrestaurant.com",
-      "telephone": "+31 6 12 34 56 78",
-      "private_feedback_url": "https://feedback.newrestaurant.com",
-      "reservation_follow_up_setting": "always",
-      "minimum_guests": 1,
-      "maximum_guests": 10,
-      "realtime_setting": "availability",
-      "realtime_reject_setting": "accept",
-      "country_code": "NL"
-    }
-  }'
-```
-
-```ruby
-api = GoTableAPI::API.new(api_key: 'YOUR_API_KEY_HERE')
-new_restaurant = api.restaurants.create(
-  name: 'New Restaurant',
-  telephone: '06 12 34 56 78',
-  email: 'info@newrestaurant.com',
-  street: 'john doe street',
-  zipcode: '1234AB',
-  city: 'Amsterdam',
-  reservation_follow_up_setting: 'always',
-  realtime_setting: 'availability',
-  realtime_reject_setting: 'accept',
-  country_code: 'NL'
-)
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 130171,
-  "name": "New Restaurant",
-  "telephone": "+31 6 12 34 56 78",
-  "email": "info@newrestaurant.com",
-  "street": "john doe street",
-  "zipcode": "1234AB",
-  "city": "Amsterdam",
-  "country_code": "NL"
-}
-```
-
-This endpoint creates a new restaurant. Creating a restaurant will automatically register this restaurant your api Key.
-
-<aside class="notice">
-  This functionality is only available for GoTable partners. Ask our support team for more information at info@gotable.app 
-</aside>
-
-### HTTP Request
-
-`POST https://gotable.app/api/v1/restaurants`
-
-### Request Parameters
-
-| Parameter                       | Type    | Default  | Description                                                                     |
+| Attribute                       | Type    | Default  | Description                                                                     |
 | ------------------------------- | ------- | -------- | ------------------------------------------------------------------------------- |
 | name\*                          | string  |          | The name of the restaurant                                                      |
 | email\*                         | string  |          | The email address of the restaurant                                             |
