@@ -67,35 +67,41 @@ reservations = restaurant.reservations
 
 ```json
 {
-   "reservations":[
-      {
-         "id":3781327,
-         "guest_name":"John Doe2",
-         "guest_email":"john@example.com",
-         "date":"2024-11-01",
-         "time":"19:00",
-         "guests":4,
-         "state":"pending",
-         "restaurant_id":130170
-      },
-      {
-         "id":3781328,
-         "guest_name":"John Doe2",
-         "guest_email":"john@example.com",
-         "date":"2024-11-01",
-         "time":"19:00",
-         "guests":4,
-         "state":"rejected",
-         "restaurant_id":130170
-      },
-      // ... more reservations
-    ],
-   "meta":{
-      "current_page":1,
-      "per_page":20,
-      "total_pages":1,
-      "total_count":16
-   }
+  "reservations": [
+    {
+      "id": 131,
+      "restaurant_id": 12345,
+      "date": "2024-12-01",
+      "time": "19:00",
+      "guests": 5,
+      "guest_name": "John Doe",
+      "guest_email": "john@example.com",
+      "guest_telephone": "+31612345678",
+      "state": "pending",
+      "created_at": "2024-11-26T09:41:52.011Z",
+      "updated_at": "2024-11-26T09:44:31.612Z"
+    },
+    {
+      "id": 2,
+      "restaurant_id": 12345,
+      "date": "2024-11-01",
+      "time": "19:00",
+      "guests": 5,
+      "guest_name": "John Two",
+      "guest_email": "john2@example.com",
+      "guest_telephone": "+31612345678"  ,
+      "state": "pending",
+      "created_at": "2024-11-25T12:20:56.793Z",
+      "updated_at": "2024-11-25T12:23:09.107Z"
+    }
+    //... more reservations
+  ],
+  "meta": {
+    "current_page": 1,
+    "per_page": 20,
+    "total_pages": 1,
+    "total_count": 16
+  }
 }
 ```
 
@@ -118,14 +124,17 @@ reservation = restaurant.reservations.find(reservation_id)
 
 ```json
 {
-  "id": 3781341,
-  "guest_name": "John Doe",
-  "guest_email": "john@example.com",
+  "id": 131,
+  "restaurant_id": 12345,
   "date": "2024-12-01",
   "time": "19:00",
-  "guests": 4,
+  "guests": 5,
+  "guest_name": "John Doe",
+  "guest_email": "john@example.com",
+  "guest_telephone": "+31612345678",
   "state": "pending",
-  "restaurant_id": 130170
+  "created_at": "2024-11-26T09:41:52.011Z",
+  "updated_at": "2024-11-26T09:44:31.612Z"
 }
 ```
 
