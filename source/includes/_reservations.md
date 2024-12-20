@@ -2,35 +2,6 @@
 
 ## List Restaurant Reservations
 
-Returns a paginated list of reservations for your restaurant.
-
-### Response Format
-
-| Field           | Type    | Description                                                                       |
-| --------------- | ------- | --------------------------------------------------------------------------------- |
-| id              | integer | Unique reservation identifier                                                     |
-| guest_name      | string  | Primary guest's name                                                              |
-| guest_email     | string  | Primary guest's email                                                             |
-| guest_telephone | string  | Primary guest's telephone                                                         |
-| date            | string  | Reservation date (YYYY-MM-DD)                                                     |
-| time            | string  | Reservation time (HH:MM)                                                          |
-| guests          | integer | Number of guests                                                                  |
-| state           | string  | Reservation status: "pending", "confirmed", "checked_in", "rejected", "cancelled" |
-| restaurant_id   | integer | Restaurant identifier                                                             |
-
-### Pagination
-
-The response includes a `meta` object with pagination details:
-
-| Field        | Type    | Description                  |
-| ------------ | ------- | ---------------------------- |
-| current_page | integer | Current page number          |
-| per_page     | integer | Number of items per page     |
-| total_pages  | integer | Total number of pages        |
-| total_count  | integer | Total number of reservations |
-
-### Example Request
-
 ```shell
 curl -X GET \
   "http://gotable.test/api/v1/restaurants/{restaurant_id}/reservations" \
@@ -104,6 +75,33 @@ reservations = restaurant.reservations
   }
 }
 ```
+
+Returns a paginated list of reservations for your restaurant.
+
+### Response Format
+
+| Field           | Type    | Description                                                                       |
+| --------------- | ------- | --------------------------------------------------------------------------------- |
+| id              | integer | Unique reservation identifier                                                     |
+| guest_name      | string  | Primary guest's name                                                              |
+| guest_email     | string  | Primary guest's email                                                             |
+| guest_telephone | string  | Primary guest's telephone                                                         |
+| date            | string  | Reservation date (YYYY-MM-DD)                                                     |
+| time            | string  | Reservation time (HH:MM)                                                          |
+| guests          | integer | Number of guests                                                                  |
+| state           | string  | Reservation status: "pending", "confirmed", "checked_in", "rejected", "cancelled" |
+| restaurant_id   | integer | Restaurant identifier                                                             |
+
+### Pagination
+
+The response includes a `meta` object with pagination details:
+
+| Field        | Type    | Description                  |
+| ------------ | ------- | ---------------------------- |
+| current_page | integer | Current page number          |
+| per_page     | integer | Number of items per page     |
+| total_pages  | integer | Total number of pages        |
+| total_count  | integer | Total number of reservations |
 
 ## Get Reservation
 
