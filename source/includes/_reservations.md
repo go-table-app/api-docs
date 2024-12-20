@@ -188,16 +188,19 @@ reservation = restaurant.reservations.create(
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 3781341,
-  "guest_name": "John Doe",
-  "guest_email": "john@example.com",
-  "date": "2024-12-01",
-  "time": "19:00",
-  "guests": 4,
-  "state": "pending",
-  "restaurant_id": 130170
-}
+  {
+    "id": 131,
+    "restaurant_id": 12345,
+    "date": "2024-12-01",
+    "time": "19:00",
+    "guests": 5,
+    "guest_name": "John Doe",
+    "guest_email": "john@example.com",
+    "guest_telephone": "+31612345678",
+    "state": "pending",
+    "created_at": "2024-11-26T09:41:52.011Z",
+    "updated_at": "2024-11-26T09:44:31.612Z"
+  }
 ```
 
 Creates a new reservation for your restaurant. Your API key must be registered to the restaurant.
@@ -238,7 +241,7 @@ curl -X PUT "https://gotable.app/api/v1/restaurants/129946/reservations/12345" \
   -H "Content-Type: application/json" \
   -d '{
     "reservation": {
-      "guests": 5
+      "guests": 6
     }
   }'
 ```
@@ -249,22 +252,25 @@ require 'go_table'
 api = GoTable::API.new(api_key: 'YOUR_API_KEY_HERE')
 restaurant = api.restaurants.find(restaurant_id)
 reservation = restaurant.reservations.find(reservation_id)
-reservation.update(guests: 5)
+reservation.update(guests: 6)
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 3042496,
-  "guest_name": "John Doe",
-  "guest_email": "customer@example.com",
-  "date": "2024-11-01",
-  "time": "19:00",
-  "guests": 5,
-  "state": "pending",
-  "restaurant_id": 129946
-}
+  {
+    "id": 131,
+    "restaurant_id": 12345,
+    "date": "2024-12-01",
+    "time": "19:00",
+    "guests": 6, // updated
+    "guest_name": "John Doe",
+    "guest_email": "john@example.com",
+    "guest_telephone": "+31612345678",
+    "state": "pending",
+    "created_at": "2024-11-26T09:41:52.011Z",
+    "updated_at": "2024-11-26T09:44:31.612Z"
+  }
 ```
 
 This endpoint updates the details of a reservation.
@@ -300,14 +306,17 @@ reservation.cancel
 
 ```json
 {
-  "id": 3781341,
-  "guest_name": "John Doe",
-  "guest_email": "john@example.com",
+  "id": 131,
+  "restaurant_id": 12345,
   "date": "2024-12-01",
   "time": "19:00",
   "guests": 5,
-  "state": "pending",
-  "restaurant_id": 130170
+  "guest_name": "John Doe",
+  "guest_email": "john@example.com",
+  "guest_telephone": "+31612345678",
+  "state": "cancelled",
+  "created_at": "2024-11-26T09:41:52.011Z",
+  "updated_at": "2024-11-26T09:44:31.612Z"
 }
 ```
 
