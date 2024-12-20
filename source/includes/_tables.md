@@ -32,6 +32,54 @@ restaurant = api.restaurants.find(restaurant_id)
 tables = restaurant.tables
 ```
 
+> The above command returns JSON structured like this:
+
+
+```json
+{
+  "tables": [
+    {
+      "id": 123,
+      "restaurant_id": 12345,
+      "label": "Window Table",
+      "section": "Main Floor",
+      "preference_order": 1,
+      "enabled": true,
+      "realtime": true,
+      "minimum_guests": 2,
+      "maximum_guests": 6,
+      "created_at": "2024-11-14T13:37:49.811Z",
+      "updated_at": "2024-11-14T13:37:49.811Z"
+    },
+    {
+      "id": 124,
+      "restaurant_id": 12345,
+      "label": "Corner Table",
+      "section": "Main Floor",
+      "preference_order": 1,
+      "enabled": true,
+      "realtime": true,
+      "minimum_guests": 2,
+      "maximum_guests": 6,
+      "created_at": "2024-11-26T09:00:47.930Z",
+      "updated_at": "2024-11-26T09:00:47.930Z"
+    },
+    {
+      "id": 125,
+      "restaurant_id": 12345,
+      "label": "Corner Table",
+      "section": "Back",
+      "preference_order": 1,
+      "enabled": true,
+      "realtime": true,
+      "minimum_guests": 0,
+      "maximum_guests": 4,
+      "created_at": "2024-11-07T09:08:56.729Z",
+      "updated_at": "2024-11-07T09:08:56.729Z"
+    }
+  ]
+}
+```
 This endpoint retrieves the list of tables for a restaurant.
 
 ### HTTP Request
